@@ -1,0 +1,18 @@
+section {
+    margin: 0 15% 0 15%;
+}
+
+.section h2 {
+    font-family: "Metal Mania";
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+}
+
+
+
+.grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+}
