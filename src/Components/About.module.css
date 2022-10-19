@@ -1,0 +1,13 @@
+.about {
+    display: flex;
+    flex:1
+}
+
+
+.about img {
+
+ 
+    width: 100px;
+    height:100px;
+  
+}
