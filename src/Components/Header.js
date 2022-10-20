@@ -2,16 +2,16 @@ import React ,{useContext} from 'react'
 import Button from './Button'
 import classes from './Header.module.css'
 import Context from '../store/Cart-Context'
-import { Link } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 
 const Header = () => {
   const ctx = useContext(Context)
 
   return (
     <div className={classes.header}>
-        <Button><Link to={''}>Home</Link></Button>
-        <Button>STORE</Button>
-        <Link to='/about' >About</Link>
+         <NavLink to={''}>HOME</NavLink>
+         <NavLink to={'/store'}>STORE</NavLink>
+        <NavLink to='/about' >ABOUT</NavLink>
        <Button>Cart</Button>
        <span>{ctx.totalAmount}</span>
     </div>

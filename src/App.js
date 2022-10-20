@@ -1,4 +1,4 @@
-
+import React from 'react';
 import './App.css';
 import Header from './Components/Header';
 import Title from './Components/Title';
@@ -7,7 +7,10 @@ import Footer from './Components/Footer';
 import CartContextProvider from './store/CartContextProvider';
 import {Route,Routes} from 'react-router-dom'
 import About from './Components/About';
-import React from 'react';
+import Home from './Components/Home';
+import ContactUs from './Components/ContactUs';
+
+
 
 const productsArr = [
 
@@ -75,21 +78,28 @@ function App() {
   return (
     <CartContextProvider>
     <div className="App">
-      <Header/>
-     <Title></Title>
-     <Routes>
-
-     <Route path='/about' element={<About></About>} />
-      <Route path='/' element={ <React.Fragment>
+      <Header/> 
+      
+      
+     
+     {/* <Routes>
+    <Route path='/' element={<Home></Home>}/>
+     <Route path='/about' element={<React.Fragment>
+      
+      <Title> <h1>The Generics</h1> </Title>
+      <About></About>
+     </React.Fragment>} />
+      <Route path='/store' element={ <React.Fragment>
+         <Title> <h1>The Generics</h1> </Title>
         <Product products={productsArr} title={'MUSIC'}/>
         <Product products={MerchProducts} title={"MERCH"}/>
         <button>See Cart</button>
 
         </React.Fragment> }/>
        
-     </Routes>
+     </Routes> */}
 
-
+<ContactUs/>
      <Footer/>
 
     </div>

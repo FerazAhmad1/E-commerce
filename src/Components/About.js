@@ -12,6 +12,7 @@ const About = () => {
         gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
         ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
        gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+       
       </p>
       
     </div>
