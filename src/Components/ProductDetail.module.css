@@ -1,0 +1,13 @@
+.detail{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+ 
+}
+.detail img {
+   
+    height: 500px;
+    width: 500px;
+    border: 1px solid red;
+}
