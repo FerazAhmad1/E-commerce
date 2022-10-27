@@ -10,6 +10,7 @@ import About from "./Components/About";
 import Home from "./Components/Home";
 import ContactUs from "./Components/ContactUs";
 import ProductDetail from "./Components/ProductDetail";
+import Login from "./Components/Login";
 
 const productsArr = [
   {
@@ -101,6 +102,7 @@ function App() {
               </React.Fragment>
             }
           />
+          <Route path="login" element={<Login />} />
         </Routes>
 
         <Footer />
