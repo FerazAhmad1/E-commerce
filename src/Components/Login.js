@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { json, useNavigate } from "react-router-dom";
 import { useAuth } from "./Auth";
 import classes from "./Login.module.css";
@@ -10,11 +10,19 @@ const Login = () => {
   const navigate = useNavigate();
   console.log(auth);
   const [login, setLogin] = useState(false);
+  useEffect(function () {
+    if (localStorage.getItem("token")) {
+      auth.login(localStorage.getItem("token"));
+      navigate("/store");
+    }
+  }, []);
   const loginHandler = async (e) => {
     e.preventDefault();
     console.log();
     const enterEmail = emailRef.current.value;
     const enterPassword = passwordRef.current.value;
+    emailRef.current.value = passwordRef.current.value = "";
+
     const user = {
       email: enterEmail,
       password: enterPassword,
