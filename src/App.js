@@ -11,6 +11,7 @@ import Home from "./Components/Home";
 import ContactUs from "./Components/ContactUs";
 import ProductDetail from "./Components/ProductDetail";
 import Login from "./Components/Login";
+import RequireAuth from "./Components/RequireAuth";
 
 const productsArr = [
   {
@@ -92,13 +93,15 @@ function App() {
             path="/store"
             element={
               <React.Fragment>
-                <Title>
-                  {" "}
-                  <h1>The Generics</h1>{" "}
-                </Title>
-                <Product products={productsArr} title={"MUSIC"} />
-                <Product products={MerchProducts} title={"MERCH"} />
-                <button>See Cart</button>
+                <RequireAuth>
+                  <Title>
+                    {" "}
+                    <h1>The Generics</h1>{" "}
+                  </Title>
+                  <Product products={productsArr} title={"MUSIC"} />
+                  <Product products={MerchProducts} title={"MERCH"} />
+                  <button>See Cart</button>
+                </RequireAuth>
               </React.Fragment>
             }
           />
