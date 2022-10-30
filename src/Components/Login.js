@@ -41,10 +41,10 @@ const Login = () => {
           }
         );
         console.log("yes");
-        console.log(response);
+
         const data = await response.json();
         if (response.ok) {
-          console.log(data.idToken);
+          localStorage.setItem("email", data.email);
           auth.login(data.idToken);
           console.log(auth);
           navigate("/store");
@@ -54,7 +54,7 @@ const Login = () => {
         console.log(error);
       }
     } else {
-      console.log(user.passsword);
+      console.log(user.password);
       console.log(user);
       try {
         const response = await fetch(

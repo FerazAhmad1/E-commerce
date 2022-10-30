@@ -1,0 +1,10 @@
+
+ .modal{
+    position: fixed;
+    right: 0;
+    top:100px;
+    background-color: #ffff;
+    border: 1px solid blue;
+    padding: 1px;
+    z-index: 1000;
+ }

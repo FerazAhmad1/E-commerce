@@ -9,13 +9,33 @@ const cartReducer = (state, action) => {
   let updateItems;
   let updateAmount;
   console.log(state);
+
   if (action.type === "ADD") {
     const findIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
-
+    if (findIndex >= 0) {
+      alert("This item is already added to the cart ");
+      return {
+        items: state.items,
+        totalAmount: state.totalAmount,
+      };
+    }
     updateItems = state.items.concat(action.item);
     updateAmount = state.totalAmount + 1;
+    return {
+      items: updateItems,
+      totalAmount: updateAmount,
+    };
+  }
+
+  if (action.type === "REMOVE") {
+    const findIndex = state.items.findIndex((item) => item.id === action.id);
+    updateItems = state.items.filter((item) => {
+      return item.id !== action.id;
+    });
+
+    updateAmount = state.items.length;
     return {
       items: updateItems,
       totalAmount: updateAmount,

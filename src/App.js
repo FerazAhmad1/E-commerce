@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactDom from "react-dom";
 import "./App.css";
 import Header from "./Components/Header";
 import Title from "./Components/Title";
-import Product from "./Components/Product";
+
 import Footer from "./Components/Footer";
 import CartContextProvider from "./store/CartContextProvider";
 import { Route, Routes } from "react-router-dom";
@@ -11,7 +12,10 @@ import Home from "./Components/Home";
 import ContactUs from "./Components/ContactUs";
 import ProductDetail from "./Components/ProductDetail";
 import Login from "./Components/Login";
+import Store from "./store/Store";
 import RequireAuth from "./Components/RequireAuth";
+import CartModal from "./Components/CartModal";
+import Modal from "./Components/Modal";
 
 const productsArr = [
   {
@@ -65,11 +69,20 @@ const MerchProducts = [
 ];
 
 function App() {
+  const [click, setClick] = useState(false);
+  const cartItemHandler = (decision) => {
+    setClick((prevState) => !prevState);
+  };
+  const portalElement = document.getElementById("overlay");
   return (
     <CartContextProvider>
       <div className="App">
         <Header />
-
+        {click && (
+          <Modal>
+            <CartModal />
+          </Modal>
+        )}
         <Routes>
           <Route
             path="/product/:productId"
@@ -94,13 +107,7 @@ function App() {
             element={
               <React.Fragment>
                 <RequireAuth>
-                  <Title>
-                    {" "}
-                    <h1>The Generics</h1>{" "}
-                  </Title>
-                  <Product products={productsArr} title={"MUSIC"} />
-                  <Product products={MerchProducts} title={"MERCH"} />
-                  <button>See Cart</button>
+                  <Store onClick={cartItemHandler} />
                 </RequireAuth>
               </React.Fragment>
             }
