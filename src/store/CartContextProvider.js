@@ -1,4 +1,5 @@
 import Context from "./Cart-Context";
+import axios from "axios";
 
 import React, { useReducer } from "react";
 const defaultState = {
@@ -8,8 +9,6 @@ const defaultState = {
 const cartReducer = (state, action) => {
   let updateItems;
   let updateAmount;
-  console.log(state);
-
   if (action.type === "ADD") {
     const findIndex = state.items.findIndex(
       (item) => item.id === action.item.id
@@ -21,8 +20,17 @@ const cartReducer = (state, action) => {
         totalAmount: state.totalAmount,
       };
     }
+
+    // const post = await axios.post(
+    //   `https://crudcrud.com/api/19e9e5e23f5741538a5bbe001bb3acb3/data${email}`,
+    //   {
+    //     ...action.item,
+    //   }
+    // );
+
     updateItems = state.items.concat(action.item);
     updateAmount = state.totalAmount + 1;
+
     return {
       items: updateItems,
       totalAmount: updateAmount,
@@ -30,7 +38,13 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === "REMOVE") {
-    const findIndex = state.items.findIndex((item) => item.id === action.id);
+    const index = state.items.findIndex((item) => item.id === action.id);
+    // const Id = state.items[index]._id;
+    // const delet = await axios.delete(
+    //   `https://crudcrud.com/api/19e9e5e23f5741538a5bbe001bb3acb3/data${email}${[
+    //     Id,
+    //   ]}`
+    // );
     updateItems = state.items.filter((item) => {
       return item.id !== action.id;
     });
@@ -47,6 +61,7 @@ const cartReducer = (state, action) => {
 
 const CartContextProvider = (props) => {
   const [cartSatae, dispatch] = useReducer(cartReducer, defaultState);
+
   const cartItemToHandler = (product) => {
     dispatch({ type: "ADD", item: product });
   };

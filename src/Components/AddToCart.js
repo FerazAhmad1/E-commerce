@@ -1,37 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Context from "../store/Cart-Context";
 import axios from "axios";
 const AddToCart = (props) => {
+  const [post, setPost] = useState(false);
   const ctx = useContext(Context);
-
+  let email = localStorage.getItem("email").replace(/[^a-zA-Z0-9]/g, "");
   const clickHandler = async () => {
-    let email = localStorage.getItem("email");
-    const index = email.lastIndexOf("@");
-    let e = email.split("");
-
-    e.splice(index, 1);
-    email = e.join("");
-    console.log(email);
-
-    const post = await axios.post(
-      `https://crudcrud.com/api/c10ca089fde04d3b9b77179ebc2cf942/data/user/${email}`,
-      {
-        id: props.item.title,
-        title: props.item.title,
-        imageUrl: props.item.imageUrl,
-        price: props.item.price,
-      }
+    let response;
+    const available = ctx.items.findIndex(
+      (item) => item.id === props.item.title
     );
-    console.log(post);
 
-    // ctx.addItem({
-    //   id: props.item.title,
-    //   title: props.item.title,
-    //   imageUrl: props.item.imageUrl,
-    //   price: props.item.price,
-    // });
-    // const post = axios.post('https://crudcrud.com/api/c10ca089fde04d3b9b77179ebc2cf942/user/')
+    if (available >= 0) {
+      alert("this item is already present in your cart");
+      return;
+    }
+    if (available < 0) {
+      const { title, ...product } = props.item;
+
+      response = await axios.post(
+        `https://crudcrud.com/api/a25b7fadbb7b44ea96ddd4c01371d746/cart${email}`,
+        {
+          id: title,
+          ...product,
+        }
+      );
+      ctx.addItem(response.data);
+    }
   };
+
   return (
     <div>
       <button onClick={clickHandler}>{props.children}</button>
